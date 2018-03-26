@@ -22,8 +22,13 @@
     "url": "https://github.com/immanuelpotter/IAAT/issues"
   },
   "homepage": "https://github.com/immanuelpotter/IAAT#readme",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.16.3",
+    "http-status": "^1.0.1"
+  },
   "devDependencies": {
-    "mocha": "^5.0.5"
+    "chai": "^4.1.2",
+    "mocha": "^5.0.5",
+    "superagent": "^3.8.2"
   }
 }
