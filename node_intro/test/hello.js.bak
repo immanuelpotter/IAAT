@@ -6,16 +6,6 @@ const status = require('http-status');
 const apiRoot = 'http://localhost:3000/';
 
 describe('Server-side HTTP request testing',function(){
-  var server;
-
-  before(function(done){
-    });
-  
-
-  after(function(){
-    server.close();
-  });
-
   it('Returns "hello world" when request type is GET',function(done){
     request.get(apiRoot)
     .end(
