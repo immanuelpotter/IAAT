@@ -2,17 +2,17 @@ const chai = require('chai');
 const expect = chai.expect;
 const request = require('superagent');
 const status = require('http-status');
-var process = require('process');
 const app = require('../index.js');
 const apiRoot = 'http://localhost:3000/';
+const port = 3000;
 
 describe('Server-side HTTP request testing',function(){
   var server;
   
   before(function(done){
-      server = app;
+      server = app.listen(port);
       done();
-    });
+  });
   
 
   after(function(){
