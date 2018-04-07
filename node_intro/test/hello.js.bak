@@ -2,10 +2,22 @@ const chai = require('chai');
 const expect = chai.expect;
 const request = require('superagent');
 const status = require('http-status');
-
+var process = require('process');
 const apiRoot = 'http://localhost:3000/';
 
 describe('Server-side HTTP request testing',function(){
+  var server;
+  
+  before(function(done){
+      server = require('../index.js');
+      done();
+  });
+  
+
+  after(function(){
+    server.close();
+  });
+
   it('Returns "hello world" when request type is GET',function(done){
     request.get(apiRoot)
     .end(
