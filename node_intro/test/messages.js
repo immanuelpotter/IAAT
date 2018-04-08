@@ -33,7 +33,7 @@ describe('messages library', function() {
     };
   }
 
-  //Conncet the messages library to the DB before running the test.
+  //Connect the messages library to the DB before running the test.
   before(function(done){
     messages = require('../lib/messages.js')(
       config.db.url,
