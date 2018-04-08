@@ -4,21 +4,35 @@ module.exports = function(url,callback){
   const mongoose = require('mongoose');
   mongoose.connect(url,callback);
 
+  const messagesSchema = new mongoose.Schema(
+      {
+          username:{
+              type:String,
+              required:true
+          },
+          text:{
+              type:String,
+              required:true
+          }
+      },
+      {strict:'throw'}
+  );
+
   const Message = mongoose.model(
     'messages',
-    {username:String,text:String}
+    messagesSchema
   );
 
   return {
     create:function(newMessage,callback){
       var message = new Message(newMessage);
-        message.save(callback);
+      message.save(callback);
     },
-     read:function(id,callback){
-         Message.findById(id).exec(callback);
-     },
+    read:function(id,callback){
+      Message.findById(id).exec(callback);
+    },
     readUsername:function(username,callback){
-       Message.find({username}).exec(callback);
+      Message.find({username}).exec(callback);
     },
     readAll:function(callback){
       Message.find({}).exec(callback);
