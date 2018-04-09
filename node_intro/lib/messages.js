@@ -25,8 +25,12 @@ module.exports = function(url,callback){
 
   return {
     create:function(newMessage,callback){
-      var message = new Message(newMessage);
-      message.save(callback);
+      try {
+        var message = new Message(newMessage);
+        } catch(exception){
+      return callback('Cannot create Message.');
+    }
+    message.save(callback);
     },
     read:function(id,callback){
       Message.findById(id).exec(callback);
