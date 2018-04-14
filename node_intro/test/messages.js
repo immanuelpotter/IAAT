@@ -281,8 +281,8 @@ describe('messages library', function() {
   });
 
   /* 1.5 Security */
-  /*
-  it('messages passed to messages.create() are sanitized to remove dangerous ' +
+
+    it('messages passed to messages.create() are sanitized to remove dangerous ' +
      'HTML before being stored',function(done){
     const dangerousHTML = '<script>maliciousCode()</script>';
     const MESSAGE_IDX = 0;
@@ -345,5 +345,4 @@ describe('messages library', function() {
         });
       });
   });
-  */
 });
