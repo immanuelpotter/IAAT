@@ -26,7 +26,7 @@ module.exports = function(url,callback){
   return {
     create:function(newMessage,callback){
         try {
-          if (typeof newMessage.username === 'string' && typeof newMessage.text === 'string') {
+          if (typeof newMessage.username === 'string' && typeof newMessage.text === 'string' && newMessage.username != '') {
             var cleanName = sanitizeHTML(newMessage.username,{allowedTags: []});
             var cleanText = sanitizeHTML(newMessage.text,{allowedTags: []});
             var message = new Message({username:cleanName,text:cleanText});
@@ -44,7 +44,12 @@ module.exports = function(url,callback){
       Message.findById(id).exec(callback);
     },
     readUsername:function(username,callback){
-      Message.find({username}).exec(callback);
+      if (typeof username === 'string' && username != ''){
+        Message.find({username}).exec(callback);
+      }
+        else{
+            return callback('Invalid ID');
+        }
     },
     readAll:function(callback){
       Message.find({}).exec(callback);
