@@ -25,12 +25,20 @@ module.exports = function(url,callback){
 
   return {
     create:function(newMessage,callback){
-      try {
-        var message = new Message(newMessage);
-        } catch(exception){
-      return callback('Cannot create Message.');
-    }
-    message.save(callback);
+        try {
+          if (typeof newMessage.username === 'string' && typeof newMessage.text === 'string') {
+            var cleanName = sanitizeHTML(newMessage.username,{allowedTags: []});
+            var cleanText = sanitizeHTML(newMessage.text,{allowedTags: []});
+            var message = new Message({username:cleanName,text:cleanText});
+          }
+            else{
+                return callback('Bad type of username or text');
+            }
+        } catch(exception) {
+        return callback('Cannot create Message.');
+      }
+      message.save(callback);
+     // }
     },
     read:function(id,callback){
       Message.findById(id).exec(callback);
