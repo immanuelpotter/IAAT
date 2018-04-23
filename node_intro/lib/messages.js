@@ -26,19 +26,17 @@ module.exports = function(url,callback){
   return {
     create:function(newMessage,callback){
         try {
-          if (typeof newMessage.username === 'string' && typeof newMessage.text === 'string' && newMessage.username != '') {
-            var cleanName = sanitizeHTML(newMessage.username,{allowedTags: []});
-            var cleanText = sanitizeHTML(newMessage.text,{allowedTags: []});
             var message = new Message({username:cleanName,text:cleanText});
-          }
-            else{
-                return callback('Bad type of username or text');
-            }
         } catch(exception) {
-        return callback('Cannot create Message.');
-      }
-      message.save(callback);
-     // }
+          return callback('Cannot create Message.');
+        }
+        if(message.username){
+          message.username = sanitizeHTML(message.username);
+        }
+        if(message.text){
+          message.text = sanitizeHTML(message.text);
+        } 
+        message.save(callback);
     },
     read:function(id,callback){
       Message.findById(id).exec(callback);
