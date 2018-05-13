@@ -1,5 +1,6 @@
 <?php
-
+//htmlspecialchars was playing up, still rendered XSS in browser
+//so needs looking at
 if (isset($_GET["int1"]) && isset($_GET["int2"])){
   $int1 = $_GET["int1"];
   $int2 = $_GET["int2"];
